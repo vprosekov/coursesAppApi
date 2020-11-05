@@ -12,6 +12,9 @@ Api Documentation
         if($helpRequest=="help"){
             require_once "help/help.php";
         }
+        else if($helpRequest=="sendsms"){
+            require_once "help/sendsms.php";
+        }
         else{
             require "help/allhelp.php";
         }

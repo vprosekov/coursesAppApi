@@ -13,7 +13,7 @@
     $query="INSERT INTO `users` (`login`, `password`, `reg_date`) VALUES ('login', '".md5("123")."', ".time().")";
         echo (sendQuery($query)?"Okay":"Not Okay");*/
         
-    $enabled = true; //включен ли апи
+    $enabled = "true"; //включен ли апи
         
     require_once "dbconnect.php"; //подключение бд
     
@@ -24,12 +24,27 @@
         if($request == "help"){
             require_once "requests/help.php";
         }
-        
+        else if($request == "sendsms"){
+            require_once "requests/sendsms.php";
+        }
+        else if($request == "verify"){
+            require_once "requests/verify.php";
+        }
+        else if($request == "auth"){
+            require_once "requests/auth.php";
+        }
+        else{
+            echo "{
+        \"status\": $enabled,
+        \"error\": \"wrongRequest\",
+        \"help\": \"Full documentation on \"http://$_SERVER[HTTP_HOST]/api.php?request=help\"\"
+    }";
+        }
         
     }
     else{
         echo "{
-    \"status\": \"$enabled\",
+    \"status\": $enabled,
     \"error\": \"noRequest\",
     \"help\": \"Full documentation on \"http://$_SERVER[HTTP_HOST]/api.php?request=help\"\"
 }";
