@@ -33,6 +33,12 @@
         else if($request == "auth"){
             require_once "requests/auth.php";
         }
+        else if($request == "restore"){
+            require_once "requests/restore.php";
+        }
+        else if($request == "restoreverifysms"){
+            require_once "requests/restoreverifysms.php";
+        }
         else{
             echo "{
         \"status\": $enabled,
