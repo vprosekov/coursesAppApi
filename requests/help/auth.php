@@ -3,7 +3,7 @@
 <h2 style="margin-left: 25px">Example</h2>
 <pre style="margin:25px;padding:10px;background-color: #444;color: #fff;border-radius: 3px;border: none;position: relative;">
     
-api.php?request=auth&phone=87776918922&password=password
+api.php?request=auth&email=abccba@gmail.com&password=password
 
 </pre>
 <br>

@@ -3,17 +3,26 @@
         exit();
     }
     
-    if(isset($_GET["smscode"]) && isset($_GET["phone"]) && isset($_GET["name"]) && isset($_GET["city"]) && isset($_GET["password"]) && isset($_GET["type"])){
-        $smsCode = $_GET["smscode"];
-        $phone = $_GET["phone"];
+    if(isset($_GET["emailcode"]) && isset($_GET["email"]) && isset($_GET["name"]) && isset($_GET["city"]) && isset($_GET["password"]) && isset($_GET["type"])){
+        $emailCode = $_GET["emailcode"];
+        $email = $_GET["email"];
         $name = $_GET["name"];
         $city = $_GET["city"];
         $password = $_GET["password"];
         $type = $_GET["type"];
-        //echo "getgood<br>";
-        $fb = sendSelectQuery("SELECT `phone` FROM `users` WHERE `phone`=$phone");
-        //print_r($fb);
-        if($fb && $fb[0]["phone"]!="")
+        
+        if(strpos($email, '@') == false){
+            echo "{
+                \"status\": $enabled,
+                \"error\": \"emailError\",
+                \"help\": \"Full documentation on \"http://$_SERVER[HTTP_HOST]/api.php?request=help\"\"
+            }";
+            exit();
+        }
+
+        $fb = sendSelectQuery("SELECT `email` FROM `users` WHERE `email`='$email'");
+        
+        if($fb && $fb[0]["email"]!="")
         {
             echo "{
                 \"status\": $enabled,
@@ -24,10 +33,10 @@
         }
         else //все норм
         {
-            if($smsCode != sendSelectQuery("SELECT `smsCode` FROM `tempUsers` WHERE `phone`=$phone")[0]["smsCode"]){
+            if($emailCode != sendSelectQuery("SELECT `emailCode` FROM `tempUsers` WHERE `email`='$email'")[0]["emailCode"]){
                 echo "{
                     \"status\": $enabled,
-                    \"error\": \"wrongSms\",
+                    \"error\": \"wrondCode\",
                     \"help\": \"Full documentation on \"http://$_SERVER[HTTP_HOST]/api.php?request=help\"\"
                 }";
                 exit();
@@ -38,7 +47,8 @@
             if(sendSelectQuery("SELECT `id` FROM `users` WHERE `apiKey`='$apiKey'")){
                 //echo sendSelectQuery("SELECT `id` FROM `users` WHERE `apiKey`='$apiKey'")."<br>";
                 echo "{
-                    \"status\": false
+                    \"status\": false,
+                    \"error\": \"Repeat again\"
                 }";
                 exit();
             }
@@ -46,7 +56,7 @@
             $publishedCourses = "";
             $payedCourses = "";
             $favouriteCourses = "";
-            $query = "INSERT INTO `users` (`name`, `city`, `phone`, `password`, `type`, `publishedCourses`, `payedCourses`, `favouriteCourses`, `apiKey`) VALUES ('$name', '$city', $phone, '".md5($password)."','$type', '$publishedCourses', '$payedCourses', '$favouriteCourses', '$apiKey')";
+            $query = "INSERT INTO `users` (`name`, `city`, `email`, `password`, `type`, `publishedCourses`, `payedCourses`, `favouriteCourses`, `apiKey`) VALUES ('$name', '$city', '$email', '".md5($password)."','$type', '$publishedCourses', '$payedCourses', '$favouriteCourses', '$apiKey')";
             //echo ($query)."<br>";
             if(sendQuery($query)){
                 echo "{

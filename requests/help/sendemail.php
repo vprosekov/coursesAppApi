@@ -1,9 +1,9 @@
-<h1 style="margin-left: 25px">"restore" Request</h1>
+<h1 style="margin-left: 25px">"sendemail" Request</h1>
 <br>
 <h2 style="margin-left: 25px">Example</h2>
 <pre style="margin:25px;padding:10px;background-color: #444;color: #fff;border-radius: 3px;border: none;position: relative;">
     
-api.php?request=restore&email=abccba@gmail.com
+api.php?request=sendsms&email=abccba@gmail.com
 
 </pre>
 <br>

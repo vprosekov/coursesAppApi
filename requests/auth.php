@@ -3,11 +3,20 @@
         exit();
     }
     
-    if(isset($_GET["phone"]) && isset($_GET["password"])){
-        $phone = $_GET["phone"];
+    if(isset($_GET["email"]) && isset($_GET["password"])){
+        $email = $_GET["email"];
         $password = md5($_GET["password"]);
+
+        if(strpos($email, '@') == false){
+            echo "{
+                \"status\": $enabled,
+                \"error\": \"emailError\",
+                \"help\": \"Full documentation on \"http://$_SERVER[HTTP_HOST]/api.php?request=help\"\"
+            }";
+            exit();
+        }
         
-        $fb = sendSelectQuery("SELECT `apiKey` FROM `users` WHERE `phone`=$phone AND `password`='$password'");
+        $fb = sendSelectQuery("SELECT `apiKey` FROM `users` WHERE `email`='$email' AND `password`='$password'");
         //print_r($fb);
         if(!$fb || $fb[0]["apiKey"]=="")
         {

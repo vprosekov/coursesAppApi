@@ -17,13 +17,15 @@
         $emailCode = rand(1000,9999);
         
         /*
-            отправка email
+            отправка email с кодом
         */
 
 
 
+
+
         $to = $email;
-        $subject = "Восстановление аккаунта";
+        $subject = "Регистрация аккаунта";
         
         $message = '<div style="display: -webkit-box;
         display: -webkit-flex;
@@ -55,8 +57,8 @@
         -webkit-box-flex: 0;
         -webkit-flex: 0 auto;
         -ms-flex: 0 auto;
-        flex: 0 auto;" class="heading">Восстановление аккаунта</h1></div>';
-        $message .= "<br><h1>Код для восстановления аккаунта: $emailCode</h1><br><h1>Никому не пересылайте этот код.</h1>";
+        flex: 0 auto;" class="heading">Регистрация аккаунта</h1></div>';
+        $message .= "<br><h1>Код для подтверждения регистрации аккаунта: $emailCode</h1><br><h1>Никому не пересылайте этот код.</h1>";
         
         $header = "From: your-domain@your.domain \r\n";
         //$header .= "Cc:afgh@somedomain.com \r\n";
@@ -72,6 +74,10 @@
             }";
             exit();
         }
+
+
+
+
 
 
 

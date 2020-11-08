@@ -24,8 +24,8 @@
         if($request == "help"){
             require_once "requests/help.php";
         }
-        else if($request == "sendsms"){
-            require_once "requests/sendsms.php";
+        else if($request == "sendemail"){
+            require_once "requests/sendemail.php";
         }
         else if($request == "verify"){
             require_once "requests/verify.php";
@@ -36,8 +36,17 @@
         else if($request == "restore"){
             require_once "requests/restore.php";
         }
-        else if($request == "restoreverifysms"){
-            require_once "requests/restoreverifysms.php";
+        else if($request == "restoreverifyemail"){
+            require_once "requests/restoreverifyemail.php";
+        }
+        else if($request == "profileinfo"){
+            require_once "requests/profileinfo.php";
+        }
+        else if($request == "changeprofileinfo"){
+            require_once "requests/changeprofileinfo.php";
+        }
+        else if($request == "addcourse"){
+            require_once "requests/addcourse.php";
         }
         else{
             echo "{
